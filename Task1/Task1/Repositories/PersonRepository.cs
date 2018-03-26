@@ -28,5 +28,26 @@ namespace Task1.Repositories
             var person = _context.Person.FirstOrDefault(p => p.Id == id);
             return person;
         }
+
+        public static void Update(int id, Person person)
+        {
+            var updatePerson = GetPersonById(id);
+            if (updatePerson != null)
+            {
+                updatePerson.Name = person.Name;
+                updatePerson.Age = person.Age;
+                _context.Person.Update(updatePerson);
+            }
+            _context.SaveChanges();
+        }
+
+        public static void Delete(int id)
+        {
+            var delPerson = _context.Person.FirstOrDefault(p => p.Id == id);
+            if (delPerson != null)
+                _context.Person.Remove(delPerson);
+            _context.SaveChanges();
+
+        }
     }
 }

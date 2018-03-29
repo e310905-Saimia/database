@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace Task1.Model
 {
@@ -16,6 +17,7 @@ namespace Task1.Model
         {
             Name = name;
             Age = age;
+            Phone = new HashSet<Phone>();
         }
 
         public Person(string name, short? age, ICollection<Phone> phone)
@@ -26,16 +28,35 @@ namespace Task1.Model
         }
 
         public long Id { get; set; }
-        [Column(TypeName = "nchar(10)")]
+        [Column(TypeName = "nchar(25)")]
         public string Name { get; set; }
         public short? Age { get; set; }
 
         [InverseProperty("Person")]
         public ICollection<Phone> Phone { get; set; }
 
+
+
+
+
         public override string ToString()
         {
-            return $"{Name}, {Age}";
+            string retValue = $"{Name}, {Age} ";
+
+            
+            //if (Phone.Count == 0)
+            //    retValue += "Ei puhelinta!\n";
+            //foreach (var phnPhone in Phone)
+            //{
+            //    retValue += $"\n   {phnPhone.ToString()}";
+            //}
+            //retValue += "\n-------------\n";
+            return retValue;
+        }
+
+        public string ShowData()
+        {
+            return $"{Id}, {Name}, {Age}";
         }
     }
 }

@@ -17,5 +17,13 @@ namespace Task1.Model
         [ForeignKey("PersonId")]
         [InverseProperty("Phone")]
         public Person Person { get; set; }
+
+
+        public override string ToString()
+        {
+            return $"{Type} - {Number}";
+        }
     }
+
+   
 }

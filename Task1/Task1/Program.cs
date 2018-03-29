@@ -17,27 +17,27 @@ namespace Task1
             
             PersonRepository personRepository = new PersonRepository();
 
-            Person person = new Person("Anja",43);
-            personRepository.Create(person);
+            //Person person = new Person("Anja",43);
+            //personRepository.Create(person);
 
 
             //// Luodaan person olio ja sille puhelinnumerot ja tallennetaan ne kantaan
             //// kts. https://docs.microsoft.com/en-us/ef/core/saving/related-data
 
-            //Person person = new Person
-            //{
-            //    Name = "Terho",
-            //    Age = 33,
-            //    Phone = new List<Phone>
-            //    {
-            //        new Phone {Number = "040123123", Type = "WORK"},
-            //        new Phone {Number = "050321321", Type = "HOME"}
-            //    }
-            //};
-            //personRepository.Create(person);
+            Person person = new Person
+            {
+                Name = "Liisa",
+                Age = 30,
+                Phone = new List<Phone>
+                {
+                    new Phone {Number = "040123123", Type = "WORK"},
+                    new Phone {Number = "050321321", Type = "HOME"}
+                }
+            };
+            personRepository.Create(person);
 
 
-            
+
 
             //var newPerson = new Person();
             //newPerson.Name = "Aku Ankka";

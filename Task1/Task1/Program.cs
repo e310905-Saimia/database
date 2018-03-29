@@ -11,11 +11,11 @@ namespace Task1
         static void Main(string[] args)
         {
             Console.WriteLine("Database CRUD operations");
-            //UIForConsoleApp();
+            UIForConsoleApp();
 
 
             
-            PersonRepository personRepository = new PersonRepository();
+            //PersonRepository personRepository = new PersonRepository();
 
             //Person person = new Person("Anja",43);
             //personRepository.Create(person);
@@ -24,17 +24,17 @@ namespace Task1
             //// Luodaan person olio ja sille puhelinnumerot ja tallennetaan ne kantaan
             //// kts. https://docs.microsoft.com/en-us/ef/core/saving/related-data
 
-            Person person = new Person
-            {
-                Name = "Liisa",
-                Age = 30,
-                Phone = new List<Phone>
-                {
-                    new Phone {Number = "040123123", Type = "WORK"},
-                    new Phone {Number = "050321321", Type = "HOME"}
-                }
-            };
-            personRepository.Create(person);
+            //Person person = new Person
+            //{
+            //    Name = "Liisa",
+            //    Age = 30,
+            //    Phone = new List<Phone>
+            //    {
+            //        new Phone {Number = "040123123", Type = "WORK"},
+            //        new Phone {Number = "050321321", Type = "HOME"}
+            //    }
+            //};
+            //personRepository.Create(person);
 
 
 
@@ -49,8 +49,8 @@ namespace Task1
             //{
             //    Console.WriteLine(p.ToString());
             //}
-            Console.WriteLine("Press <Enter> to Exit");
-            Console.ReadLine();
+            //Console.WriteLine("Press <Enter> to Exit");
+            //Console.ReadLine();
 
         }
 
@@ -75,8 +75,9 @@ namespace Task1
                 switch (info.Key)
                 {
                     case ConsoleKey.C:
-                        var person = new Person("Masa", 25);
-                        personRepository.Create(person);
+                        ViewPerson.AddPerson();
+                        //var person = new Person("Masa", 25);
+                        //personRepository.Create(person);
                         break;
                     case ConsoleKey.R:
                         ViewPerson.PrintToScreen(personRepository.Get());

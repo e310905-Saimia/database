@@ -42,15 +42,6 @@ namespace Task1.Model
         public override string ToString()
         {
             string retValue = $"{Name}, {Age} ";
-
-            
-            //if (Phone.Count == 0)
-            //    retValue += "Ei puhelinta!\n";
-            //foreach (var phnPhone in Phone)
-            //{
-            //    retValue += $"\n   {phnPhone.ToString()}";
-            //}
-            //retValue += "\n-------------\n";
             return retValue;
         }
 

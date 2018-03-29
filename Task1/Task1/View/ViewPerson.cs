@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Text;
 using Task1.Model;
+using Task1.Repositories;
 
 namespace Task1.View
 {
@@ -36,6 +38,36 @@ namespace Task1.View
             }
             Console.WriteLine("\n-------------\n");
             
+        }
+
+        public static void AddPerson()
+        {
+            Console.Write("Type name: ");
+            string name = Console.ReadLine();
+            Console.Write("Type age: ");
+            short age = short.Parse(Console.ReadLine());
+
+            List<Phone> phones = new List<Phone>();
+            string addAnother = "Y";
+            Console.WriteLine("Add phones");
+            do
+            {
+                Console.Write("Type phonenumber: ");
+                string phoneNumber = Console.ReadLine();
+                Console.Write("Phone type <Home/Work>: ");
+                string phoneType = Console.ReadLine();
+                
+                var addPhone = new Phone(phoneType,phoneNumber);
+                phones.Add(addPhone);
+
+                Console.Write("Add another phone <Y/N>: ");
+                addAnother = Console.ReadLine();
+
+            } while(addAnother.ToUpper() != "N");
+
+            var addPerson = new Person(name, age, phones);
+            PersonRepository personRepository = new PersonRepository();
+            personRepository.Create(addPerson);
         }
     }
 }

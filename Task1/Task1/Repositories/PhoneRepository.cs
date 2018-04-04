@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
@@ -13,8 +14,15 @@ namespace Task1.Repositories
         {
             using (var context = new PersondbContext())
             {
-                context.Add(phone);
-                context.SaveChanges();
+                try
+                {
+                    context.Add(phone);
+                    context.SaveChanges();
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine(ex.Message + ex.LineNumber);
+                }
             }
         }
 

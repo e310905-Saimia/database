@@ -31,7 +31,7 @@ namespace Task1.Model
 
         public override string ToString()
         {
-            return $"{Type} - {Number}";
+            return $"{Id}\t{Type}\t{Number}";
         }
     }
 

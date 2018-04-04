@@ -32,9 +32,11 @@ namespace Task1.View
             Console.WriteLine($"{person.Name}, {person.Age}");
             if (person.Phone.Count == 0)
                 Console.WriteLine("Ei puhelinta!");
+            else
+                Console.WriteLine("Id\tTyyppi\t\tNumero");
             foreach (var phnPhone in person.Phone)
             {
-                Console.WriteLine($"\n   {phnPhone.ToString()}");
+                Console.WriteLine($"{phnPhone.ToString()}");
             }
             Console.WriteLine("\n-------------\n");
             

@@ -1,6 +1,9 @@
 ﻿using System;
 using BankApp.Models;
+using BankApp.Repositories;
 using BankApp.Services;
+using BankApp.Views;
+
 
 
 namespace BankApp
@@ -13,16 +16,23 @@ namespace BankApp
             try
             {
                 Console.WriteLine("BankApp v1.1");
-                BankService bankService = new BankService();
-                var bankCustomers = bankService.GetBankCustomers();
-                foreach (var bC in bankCustomers)
-                {
-                    Console.WriteLine(bC.ToString());
-                    foreach (var c in bC.Customer)
-                    {
-                        Console.WriteLine(c.ToString());
-                    }
-                }
+                BankView bankView = new BankView();
+                //bankView.DeleteBank();
+                //bankView.CreateBankCustomerAccount();
+                
+                //AccountView accountView = new AccountView();
+                //accountView.AddTransaction();
+                bankView.PrintAllBanks();
+                //AccountRepository accountRepository = new AccountRepository();
+                ////var account = accountRepository.GetAccountByIban("FI44 1234");
+
+                //Transaction transaction = new Transaction
+                //{
+                //    Iban= "FI44 1234",
+                //    Amount = -500,
+                //    TimeStamp = DateTime.Today
+                //};
+                //accountRepository.AddTransaction(transaction);
 
 
             }

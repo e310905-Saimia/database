@@ -14,5 +14,12 @@ namespace BankApp.Repositories
         void Create(Bank bank);
         void Update(Bank bank);
         void Delete(int id);
+
+        string CreateAccount();
+        bool AddTransactionForCustomer(string accountNumber, Transaction transaction);
+        double GetBalanceForCustomer(string accountNumber);
+
+        List<Transaction> GetTransactionsForCustomerForTimeSpan(string accountNumber,
+            DateTime startTime, DateTime endTime);
     }
 }

@@ -10,7 +10,7 @@ namespace BankApp.Repositories
     /// <summary>
     /// Täällä otetaan yhteys tietokantaan ja suoritetaan tietokannan käpistely
     /// </summary>
-    class BankRepository:IBank
+    class BankRepository : IBank
     {
         public List<Bank> GetBanks()
         {
@@ -37,6 +37,8 @@ namespace BankApp.Repositories
                 {
                     List<Bank> banks = context.Bank
                         .Include(b => b.Customer)
+                        //.Include(b => b.Account)
+                        //.Include(b=>b.Account).ThenInclude(a=>a.Transaction)
                         .ToListAsync().Result;
                     return banks;
                 }
@@ -45,14 +47,26 @@ namespace BankApp.Repositories
                     throw new NotImplementedException($"{ex.Message}\n{ex.InnerException.Message} \n");
                 }
 
-            }            
-            
-           
+            }
+
         }
 
         public List<Bank> GetBankAccounts()
         {
-            throw new NotImplementedException();
+            using (var context = new BankdbContext())
+            {
+                try
+                {
+                    List<Bank> banks = context.Bank
+                        .Include(b => b.Account)
+                        .ToListAsync().Result;
+                    return banks;
+                }
+                catch (Exception ex)
+                {
+                    throw new NotImplementedException($"{ex.Message}\n{ex.InnerException.Message} \n");
+                }
+            }
         }
 
         public Bank GetBankById(long id)
@@ -80,14 +94,14 @@ namespace BankApp.Repositories
                 {
                     context.Add(bank);
                     context.SaveChanges();
-                }                
+                }
                 catch (Exception ex)
-                {                    
+                {
                     throw new NotImplementedException($"{ex.Message}\n{ex.InnerException.Message} \nXXX");
                 }
 
             }
-                
+
         }
 
         public void Update(Bank bank)
@@ -100,7 +114,7 @@ namespace BankApp.Repositories
                     if (updateBank != null)
                     {
                         updateBank.Name = bank.Name;
-                        updateBank.Bic = bank.Bic;                        
+                        updateBank.Bic = bank.Bic;
                         context.Bank.Update(updateBank);
                     }
                     context.SaveChanges();
@@ -131,5 +145,49 @@ namespace BankApp.Repositories
 
             }
         }
+
+        public string CreateAccount()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddTransactionForCustomer(string accountNumber, Transaction transaction)
+        {
+            throw new NotImplementedException();
+        }
+
+        public double GetBalanceForCustomer(string accountNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Transaction> GetTransactionsForCustomerForTimeSpan(string accountNumber, DateTime startTime, DateTime endTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Bank> GetTransactionsFromBankCustomersAccounts()
+        {
+            using (var context = new BankdbContext())
+            {
+                try
+                {
+                    List<Bank> banks = context.Bank
+                        .Include(b => b.Customer)
+                        .Include(b => b.Account)
+                        .Include(b => b.Account).ThenInclude(a => a.Transaction)
+                        .Where(b=>b.Id==13)
+                        .ToListAsync().Result;
+                    return banks;
+                }
+                catch (Exception ex)
+                {
+                    throw new NotImplementedException($"{ex.Message}\n{ex.InnerException.Message} \n");
+                }
+
+            }
+
+        }
+
     }
 }

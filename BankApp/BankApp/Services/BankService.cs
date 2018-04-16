@@ -23,14 +23,21 @@ namespace BankApp.Services
             return bankCustomers;
         }
 
+        public List<Bank> GetTransactionsFromBankCustomersAccounts()
+        {
+            var bankCustomers = bankRepository.GetTransactionsFromBankCustomersAccounts();
+            return bankCustomers;
+        }
         public List<Bank> GetBankAccounts()
         {
-            throw new NotImplementedException();
+            var bankAccounts = bankRepository.GetBankAccounts();
+            return bankAccounts;
         }
 
-        public List<Bank> GetAllBanks()
+        public List<Bank> GetBanks()
         {
-            throw new NotImplementedException();
+            var banks = bankRepository.GetBanks();
+            return banks;
         }
 
         public Bank FindBankById(long id)
@@ -46,7 +53,13 @@ namespace BankApp.Services
 
         public void DeleteBank(int id)
         {
-            throw new NotImplementedException();
+            bankRepository.Delete(id);
         }
+
+        //public List<Transaction> AccountTransactions(string iban)
+        //{
+        //    var accountTransactions = bankRepository.GetBanks();
+        //    return accountTransactions;
+        //}
     }
 }

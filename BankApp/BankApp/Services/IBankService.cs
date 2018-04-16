@@ -9,7 +9,7 @@ namespace BankApp.Services
     {
         List<Bank> GetBankCustomers();
         List<Bank> GetBankAccounts();
-        List<Bank> GetAllBanks();
+        List<Bank> GetBanks();
         Bank FindBankById(long id);
         void CreateBank(Bank bank);
         void UpdateBank(Bank bank);

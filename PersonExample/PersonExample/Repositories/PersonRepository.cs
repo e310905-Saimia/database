@@ -45,7 +45,7 @@ namespace PersonExample.Repositories
             //    FirstOrDefault(p => p.Id == id);
 
             // Vaihtoehto C
-            var person = _persontestdbContext.Person.Find();
+            var person = _persontestdbContext.Person.Find(id);
                
 
             return person;

@@ -10,8 +10,12 @@ namespace PersonExample
         static void Main(string[] args)
         {
             //Testing database Read
-            //ReadByCity();
-            ReadById();
+            ReadByCity();
+            for (int i = 0; i < 100; i++)
+            {
+                ReadById(i*2);
+            }
+            
 
             
         }
@@ -22,15 +26,20 @@ namespace PersonExample
 
             foreach (var p in persons)
             {
+                
                 Console.WriteLine($"{p.Id} {p.FirstName} {p.LastName} {p.City}");
             }
+            Console.WriteLine("------------------------------");
         }
 
-        static void ReadById()
+        static void ReadById(long id)
         {
-            var person = _personRepository.ReadById(1);
+            var person = _personRepository.ReadById(id);
 
-            Console.WriteLine($"{person.Id} {person.FirstName} {person.LastName} {person.City}");
+            if (person==null)
+                Console.WriteLine($"Asiakasta numerolla {id} ei löydy!");
+            else
+                Console.WriteLine($"{person.Id} {person.FirstName} {person.LastName} {person.City}");
         }
     }
 }

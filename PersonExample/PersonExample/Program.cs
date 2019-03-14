@@ -1,45 +1,77 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using PersonExample.Models;
 using PersonExample.Repositories;
+using PersonExample.Views;
 
 namespace PersonExample
 {
     class Program
     {
-        private static readonly PersonRepository _personRepository = new PersonRepository();
+        
         static void Main(string[] args)
         {
-            //Testing database Read
-            ReadByCity();
-            for (int i = 0; i < 100; i++)
+            string choise = null;
+            UIModel uiModel = new UIModel();
+
+            string msg = "";
+            do
             {
-                ReadById(i*2);
+                choise = UserInterface();
+
+                switch (choise.ToUpper())
+                {
+                    case "C":
+                       
+                        uiModel.CreatePerson();
+                        msg = "\n----------------------------> \nPaina Enter jatkaaksesi!";
+                        break;
+                    case "R":
+                        uiModel.ReadById(5002);
+                        msg = "\n----------------------------> \nPaina Enter jatkaaksesi!";
+                        break;
+                    case "U":
+                        uiModel.UpdatePerson();
+                        msg = "\n---------------------------->! \nPaina Enter jatkaaksesi!";
+                        break;
+                    case "D":
+                        uiModel.DeletePerson(5003);
+                        msg = "\n---------------------------->! \nPaina Enter jatkaaksesi!";
+                        break;
+                    case "R1":
+                        uiModel.ReadByCity();;
+                        msg = "\n----------------------------> \nPaina Enter jatkaaksesi!";
+                        break;
+                    case "X":
+                        msg = "\nOhjelman suoritus päättyy!";
+                        break;
+                    default:
+                        msg = "Nyt tuli huti yritä uudestaan - Paina Enter ja aloita alusta!";
+                        break;
+                }
+
+                Console.WriteLine(msg);
+                Console.ReadLine();
+                Console.Clear();
             }
-            
+            while (choise.ToUpper() != "X");
 
-            
+
         }
 
-        static void ReadByCity()
+        static string UserInterface()
         {
-            var persons = _personRepository.ReadByCity("Juuka");
+            Console.WriteLine("Tietokannan käsittely esimerkki!");
+            Console.WriteLine("[C] Lisää tietokantaan uusi tietue");
+            Console.WriteLine("[R] Lue tietokannasta tietoja");
+            Console.WriteLine("[U] Päivitä henkilön tiedot");
+            Console.WriteLine("[D] Poista henkilö tietokannasta");
+            Console.WriteLine("[R1] Hae tiedot kaupungista");
+            Console.WriteLine("[X] Lopeta ohjelmansuoritus");
+            Console.WriteLine();
+            Console.Write("Valitse mitä tehdään: ");
 
-            foreach (var p in persons)
-            {
-                
-                Console.WriteLine($"{p.Id} {p.FirstName} {p.LastName} {p.City}");
-            }
-            Console.WriteLine("------------------------------");
-        }
-
-        static void ReadById(long id)
-        {
-            var person = _personRepository.ReadById(id);
-
-            if (person==null)
-                Console.WriteLine($"Asiakasta numerolla {id} ei löydy!");
-            else
-                Console.WriteLine($"{person.Id} {person.FirstName} {person.LastName} {person.City}");
-        }
+            return Console.ReadLine();
+        }        
     }
 }
